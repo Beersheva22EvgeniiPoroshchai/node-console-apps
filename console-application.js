@@ -1,16 +1,25 @@
 
 import { PromptAsync } from "./PromptAsync.js";
+import { PromptHandler } from "./PromptHandler.js";
+export let promptAsync = new PromptAsync(); 
+const handler = new PromptHandler(promptAsync);   //handler to promptAsync
  asyncTyping().then(()=>console.log("Thanks and Bye"));
 console.log("\nexample of asynchronous console input");
+   
+
 async function asyncTyping() {
-    const promptAsync = new PromptAsync();
+    
     let num1, num2, num3;
     let appleOrange;
     let employee;
     num1 = await promptAsync.readNumber("Enter a number from 1 to 10", 1, 10);
-
+    if (num1) {
     num2 = await promptAsync.readNumber("Enter any number");
     num3 = await promptAsync.readNumber("Enter any positive number", 1);
+    
+    if (num3) {
+        promptAsync.emit('positive', num3)
+    }
     appleOrange = await promptAsync.readPredicate("Enter either apple or orange", "neither apple nor orange", answer => answer == 'apple' || answer == 'orange');
     employee = await promptAsync.readObject("Enter employee <id>#<name>#salary", answer => {
         const tokens = answer.split('#');
@@ -27,6 +36,9 @@ async function asyncTyping() {
     });
     console.log(`num1=${num1}, num2=${num2}, num3=${num3}, appleOrange=${appleOrange},
  employee=${JSON.stringify(employee)}`);
+        }
+
+  
     promptAsync.close();
 }
 

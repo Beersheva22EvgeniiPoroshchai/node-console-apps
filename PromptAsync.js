@@ -1,10 +1,18 @@
 import readline from 'node:readline';
+import EventsEmitter from 'node:events';
+
 const readlineInterface = readline.createInterface({
     input: process.stdin,
     output: process.stdout
 })
-export class PromptAsync {
+
+readlineInterface.on('SIGINT', () => {
+    console.log('^C is forbidden');
+})
+
+export class PromptAsync extends EventsEmitter {
   
+     
      prompt(promptStr) {
        
         return new Promise(resolve => {
@@ -15,6 +23,7 @@ export class PromptAsync {
     }
 
     close() {
+        this.emit('close')
         readlineInterface.close();
     }
 
@@ -25,7 +34,11 @@ export class PromptAsync {
                 running = false;
                 try {
                     const answer = await this.prompt(promptStr);    //get string: Promise
-                    res = mapper(answer);    //mapper convert str to obj
+                    if (answer === 'cancel') {
+                        readlineInterface.pause();   //next prompt
+                    } else {
+                          res = mapper(answer);    //mapper convert str to obj
+                    }
                 } catch (error) {
                     console.log(error);    //exception and run is continuing while user input valid data
                     running=true;
