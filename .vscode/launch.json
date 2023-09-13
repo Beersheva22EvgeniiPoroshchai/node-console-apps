@@ -4,6 +4,7 @@
     // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
     "version": "0.2.0",
     "configurations": [
+        
         {
             "type": "node",
             "request": "launch",
@@ -11,9 +12,9 @@
             "skipFiles": [
                 "<node_internals>/**"
             ],
-            "program": "${workspaceFolder}\\appl-streams.js",
+            "program": "${workspaceFolder}\\mongo-appl.js",
             "env": {
-                "NODE_ENV": "production"
+                "ATLAS_URI": "mongodb+srv://root:12345.com@cluster0.d19qlu2.mongodb.net/college?retryWrites=true&w=majority"   //college:base name
             }
         } 
         
