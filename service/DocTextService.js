@@ -1,23 +1,23 @@
 import fs from 'node:fs/promises'
 
-export default DocTextService {
+export default class DocTextService {
     async getDocumentation(file) {
-        return await this.#getStream(file, true)
+        return await this.#getStream(file, true);
     }
 
     async getText(file) {
-        return await this.#getStream(file, false)
+        return await this.#getStream(file, false);
     }
 
-    #getStream(file, isDoc) {
-            const handler = await fs.open(file) 
+   async #getStream(handler, isDoc) {
             let streamInput = handler.createReadStream();
             streamInput.setEncoding('utf-8'); 
-            streamInput.flatMap(chunk => chunk.split('\n')).filter(line => {
+            streamInput = streamInput.flatMap(chunk => chunk.split('\n')).filter(line => {
                 
-                const res = line.trim.startsWith('//');
+                const res = line.trim().startsWith('//');
                 return isDoc ? res : !res;
             }).map(line => isDoc ? line.substr('//') : line);
             return streamInput;
             }
     }
+
