@@ -16,7 +16,7 @@ export default class DocTextService {
                 
                 const res = line.trim().startsWith('//');
                 return isDoc ? res : !res;
-            }).map(line => isDoc ? line.substr('//') : line);
+            }).map(line => isDoc ? line.trim().substr(2) : line);
             return streamInput;
             }
     }
