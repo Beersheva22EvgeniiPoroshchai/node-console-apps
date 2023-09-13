@@ -1,4 +1,4 @@
 import MongoConnection from "./domain/MongoConnection.mjs";
-const mongoconnection = new MongoConnection(process.env.ATLAS_URI, "college");
-const studentsMDB = mongoconnection.getCollection("students");
-studentsMDB.find({phone:{$regex:/^050/}}).toArray().then(data => console.log(data));
+const mongoConnection = new MongoConnection(process.env.ATLAS_URI, 'college');
+const studentsMDB = mongoConnection.getCollection("students");
+studentsMDB.find({phone:{$regex:/^052/}}).toArray().then(data => console.log(data));   //toArray - promise; if stream: emit,on
