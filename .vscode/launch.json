@@ -5,6 +5,7 @@
     "version": "0.2.0",
     "configurations": [
 
+
         {
             "type": "node",
             "request": "launch",
@@ -12,9 +13,9 @@
             "skipFiles": [
                 "<node_internals>/**"
             ],
-            "program": "${workspaceFolder}\\appl-express.js",
+            "program": "${workspaceFolder}/appl-express.js",
             "env": {
-                "ATLAS_URI": "mongodb+srv://root:12345.com@cluster0.d19qlu2.mongodb.net/college?retryWrites=true&w=majority"   //college:base name
+                "ATLAS_URI_ACCOUNTS_TEST":"mongodb+srv://root:12345.com@cluster0.d19qlu2.mongodb.net/users?retryWrites=true&w=majority"   //college:dbase name
             }
         } 
         

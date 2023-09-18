@@ -1,3 +1,4 @@
 {
-    "mongo-uri": "ATLAS_URI"
+    "mongo-uri_test": "ATLAS_URI_ACCOUNTS_TEST",
+    "mongo-uri_prod": "ATLAS_URI_ACCOUNTS_PROD"
 }
