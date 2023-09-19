@@ -45,7 +45,7 @@ users.post("/login", asyncHandler(
         const accessToken = await usersService.login(loginData);
         if (!accessToken) { //undefined
             res.status(400);
-            throw `wrong credentilas`
+            throw `wrong credentials`
         }
         res.send({accessToken})   //Js object
     }

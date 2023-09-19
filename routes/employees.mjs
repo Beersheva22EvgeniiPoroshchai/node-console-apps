@@ -20,17 +20,6 @@ const schema = Joi.object({
 
 employees.use(validate(schema));
 
-// employees.delete('/:id', authVerification("ADMIN"), asyncHandler(
-//     async (req, res) => {
-//         const id = +req.params.id;
-//         if (!await employeesService.deleteEmployee(id)){
-//             res.status(404);
-//             throw `employee with id ${id} not found`
-//         }
-//         res.send();
-//     }
-// ))
-
 employees.post('',authVerification("ADMIN"), valid, asyncHandler(
     async (req, res) => {
         const employee = await employeesService.addEmployee(req.body);
