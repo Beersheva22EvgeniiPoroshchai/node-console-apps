@@ -13,7 +13,7 @@
             "skipFiles": [
                 "<node_internals>/**"
             ],
-            "program": "${workspaceFolder}/appl-express.js",
+            "program": "${workspaceFolder}/appl-websocket.mjs",
             "env": {
                 "ATLAS_URI_COMPANY_TEST":"mongodb+srv://root:12345.com@cluster0.d19qlu2.mongodb.net/company?retryWrites=true&w=majority",   //college:dbase name
                 "JWT_SECRET_TEST":"jwt_secret"
