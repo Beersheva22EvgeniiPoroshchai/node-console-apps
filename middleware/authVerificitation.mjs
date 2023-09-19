@@ -1,3 +1,4 @@
+//middleware for authverification ('admin', 'user', 'adminAccounts')
 const authVerification = (...roles) => {
     return (req, res, next) => {
         if(!req.user) {

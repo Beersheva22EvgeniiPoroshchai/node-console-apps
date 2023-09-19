@@ -16,7 +16,7 @@
                 "minDate": "1950-01-01",
                 "maxDate": "2004-12-31",
                 "minId": 100000,
-                "maxId": 999999,
+                "maxId": 1000000,
                 "minSalary": 7000,
                 "maxSalary": 50000,
                 "departments": [

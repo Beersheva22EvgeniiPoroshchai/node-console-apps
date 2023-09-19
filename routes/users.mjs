@@ -3,6 +3,7 @@
 import express from 'express'   //import from fw
 import asyncHandler from 'express-async-handler'
 import Joi from 'joi'
+import valid from '../middleware/valid.mjs';
 import { validate } from '../middleware/validation.mjs';
 import UsersService from '../service/UsersService.mjs';
 import authVerification from '../middleware/authVerificitation.mjs';
@@ -16,15 +17,9 @@ const schema = Joi.object({
     roles: Joi.array().items(Joi.string().valid('ADMIN', 'USER')).required()
 })
 users.use(validate(schema))
-users.post('', authVerification("ADMIN_ACCOUNTS"), asyncHandler (async (req, res) => {    //regiser routing '/signup' (add users)
-    if (!req.validated) {
-       res.status(500);
-        throw('This API requires validation')
-    }
-        if (req.joiError) {
-        res.status(400);
-        throw(req.joiError)
-    }
+users.post('', authVerification("ADMIN_ACCOUNTS"), valid, asyncHandler (async (req, res) => {    //regiser routing '/signup' (add users)
+   
+    
     const accountRes = await usersService.addAccount(req.body);
     if (accountRes == null) {
         res.status(400);
