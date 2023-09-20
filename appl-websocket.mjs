@@ -13,7 +13,7 @@ wss.on('connection', (ws, req) => {
     console.log(`connection from ${req.socket.remoteAddress} established`);
     console.log(`body inside request ${req.body}`);
     ws.send('hello');
-    ws.on('close', (d) => {
+    ws.on('close', () => {
         console.log(`connection from ${req.socket.remoteAddress} closed`);
     });
     ws.on(`message`, async message => {
