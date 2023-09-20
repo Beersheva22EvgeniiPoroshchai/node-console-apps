@@ -13,7 +13,8 @@ const schema = Joi.object({
     id: Joi.number().min(minId).max(maxId),
     birthDate: Joi.date().iso().less(maxDate).greater(minDate).required(),  //iso -> ISO format
     name: Joi.string().required(),
-    department: Joi.string().valid(...departments).required(), //should be string from array values 
+    department: Joi.string().valid(...departments).required(), //should be string from array values, just string 
+   // departments: Joi.array().items(Joi.string().valid(...departments)).required(),
     salary: Joi.number().min(minSalary).max(maxSalary).required(),
     gender: Joi.any().allow('male', 'female').required()  
 })
@@ -27,6 +28,10 @@ employees.post('',authVerification("ADMIN"), valid, asyncHandler(
             res.status(400);
             throw `employee with id ${req.body.id} already exists`
         }
+        if (req.wss) {
+            req.wss.clients.forEach(c=>c.send(JSON.stringify({op:'add', data: 'employee'})))
+        }
+
         res.send(employee);
     }
 ))
@@ -42,6 +47,10 @@ employees.put('/:id',authVerification("ADMIN"), valid, asyncHandler(
             res.status(404);
             throw `employee with id ${req.body.id} doesn't exist`
         }
+        if (req.wss) {
+            req.wss.clients.forEach(c=>c.send(JSON.stringify({op:'update', data: 'employee'})))
+        }
+
         res.send(employee);
     }
 ))
@@ -51,6 +60,10 @@ employees.delete('/:id',authVerification("ADMIN"), asyncHandler(
             res.status(404);
             throw `employee with id ${req.params.id} doesn't exist`
         }
+        if (req.wss) {
+            req.wss.clients.forEach(c=>c.send(JSON.stringify({op:'delete', data: 'id'})))
+        }
+
         res.send();
     }
 ))
